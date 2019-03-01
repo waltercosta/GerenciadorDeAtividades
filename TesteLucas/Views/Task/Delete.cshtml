@@ -1,0 +1,75 @@
+﻿@model TesteLucas.Models.EntityModel.Tasks.Task
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Remover a tarefa #@Model.IdTask</h2>
+
+<h3>Você realmente deseja remover esta tarefa?</h3>
+<div>
+    <h4>@Model.Name - #@Model.IdTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Identificador da tarefa
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdTask)
+        </dd>
+        <dt>
+            Nome
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Descrição
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            Data Inicial
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateBegin)
+        </dd>
+        <dt>
+            Data Final
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateEnd)
+        </dd>
+        <dt>
+            Status
+        </dt>
+        <dd>
+            @if (Model.Type == 1)
+            {
+                <label>To Do / À Fazer</label>
+            }
+            else
+             if (Model.Type == 2)
+            {
+                <label>Doing / Fazendo</label>
+            }
+            else
+             if (Model.Type == 3)
+            {
+                <label>Done / Feito</label>
+            }
+            else
+             if (Model.Type == 4)
+            {
+                <label>Backlog / Ideias</label>
+            }
+        </dd>
+    </dl>
+    
+    <form asp-action="delete">
+        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="IdTask" name="id"/>
+        <a asp-action="index">Voltar</a>
+    </form>
+</div>

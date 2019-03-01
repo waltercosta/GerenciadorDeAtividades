@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TesteLucas.Models.EntityModel.Tasks.Task>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Listagem das tarefas</h2>
+
+<p>
+    <a asp-action="Create">Criar nova tarefa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Identificador da tarefa
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Data Inicial
+            </th>
+            <th>
+                Data Final
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTask)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBegin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                
+                @if (item.Type == 1)
+                {
+                    <label>To Do / À Fazer</label>
+                }
+                else
+                  if (item.Type == 2)
+                {
+                    <label>Doing / Fazendo</label>
+                }
+                else
+                  if (item.Type == 3)
+                {
+                    <label>Done / Feito</label>
+                }
+                else
+                  if (item.Type == 4)
+                {
+                    <label>Backlog / Ideias</label>
+                }
+                
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdTask /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detalhe", "Details", new { id=item.IdTask /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Excluir", "Delete", new { id=item.IdTask /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
